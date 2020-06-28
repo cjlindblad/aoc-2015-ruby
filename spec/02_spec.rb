@@ -1,4 +1,4 @@
-require '02/gift_wrap_calculator'
+require '02/solution'
 
 RSpec.describe 'day 2 part 1 solution' do
   it 'needs 58 square feet from 2x3x4 box' do
