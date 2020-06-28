@@ -1,18 +1,17 @@
 class Calculator
   def self.calculate_paper(instructions)
-    sum = 0
-    instructions.each do |instruction|
-      box = Box.new(*self.parse(instruction))
-      sum += box.paper_demand
-    end
-    sum
+    self.reduce_boxes(instructions, :paper_demand)
   end
 
   def self.calculate_ribbon(instructions)
+    self.reduce_boxes(instructions, :ribbon_demand)
+  end
+
+  def self.reduce_boxes(instructions, message)
     sum = 0
     instructions.each do |instruction|
       box = Box.new(*self.parse(instruction))
-      sum += box.ribbon_demand
+      sum += box.send(message)
     end
     sum
   end
