@@ -1,6 +1,8 @@
 require 'set'
 
-class Route
+class Santa
+  attr_reader :visited
+
   def initialize
     @x = 0
     @y = 0
@@ -33,5 +35,18 @@ class Route
   def visited_houses()
     @visited.size
   end
+
+  def visited_houses_with(other_santa)
+    @visited.merge(other_santa.visited).size
+  end
 end
 
+class String
+  def even_chars
+    self.split('').select.each_with_index { |_, i| i.even? }.join()
+  end
+
+  def odd_chars
+    self.split('').select.each_with_index { |_, i| i.odd? }.join()
+  end
+end
