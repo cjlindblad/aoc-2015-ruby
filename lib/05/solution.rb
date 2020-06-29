@@ -6,4 +6,11 @@ class StringCategorizer
 
     !!(has_three_vowels and has_double_letters and has_forbidden_strings.nil?)
   end
+
+  def self.really_nice?(string)
+    has_repeating_pair = string =~ /([a-z])([a-z]).*\1\2/
+    has_repeating_char_with_separator = string =~ /([a-z])[a-z]\1/
+
+    !!(has_repeating_pair and has_repeating_char_with_separator)
+  end
 end

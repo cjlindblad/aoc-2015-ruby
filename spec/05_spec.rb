@@ -31,3 +31,31 @@ RSpec.describe "Day 5 part 1" do
     end
   end
 end
+
+RSpec.describe "Day 5 part 2" do
+  it "thinks that qjhvhtzxzqqjkmpb is nice" do
+    expect(StringCategorizer.really_nice? 'qjhvhtzxzqqjkmpb').to be true
+  end
+
+  it "thinks that xxyxx is nice" do
+    expect(StringCategorizer.really_nice? 'xxyxx').to be true
+  end
+
+  it "thinks that uurcxstgmygtbstg is naughty" do
+    expect(StringCategorizer.really_nice? 'uurcxstgmygtbstg').to be false
+  end
+
+  it "thinks that ieodomkazucvgmuy is naughty" do
+    expect(StringCategorizer.really_nice? 'ieodomkazucvgmuy').to be false
+  end
+
+  it "solves part 2" do
+    File.open('lib/05/input.txt') do |file|
+      nice_strings = 0
+      file.each_line do |line|
+        nice_strings += 1 if StringCategorizer.really_nice? line
+      end
+      expect(nice_strings).to eq 0
+    end
+  end
+end
