@@ -55,7 +55,7 @@ RSpec.describe "Day 5 part 2" do
       file.each_line do |line|
         nice_strings += 1 if StringCategorizer.really_nice? line
       end
-      expect(nice_strings).to eq 0
+      expect(nice_strings).to eq 51
     end
   end
 end
