@@ -3,6 +3,7 @@ require 'set'
 class LightGrid
   def initialize
     @lights = Set.new
+    @brightness = Hash.new(0)
   end
 
   def parse_instruction(instruction)
@@ -26,19 +27,27 @@ class LightGrid
       case command
       when :turn_on
         @lights.add coordinate
+        @brightness[coordinate] += 1
       when :turn_off
         @lights.delete coordinate
+        @brightness[coordinate] -= 1
+        @brightness.delete coordinate if @brightness[coordinate] < 1
       when :toggle
         if @lights.include? coordinate
           @lights.delete coordinate
         else
           @lights.add coordinate
         end
+        @brightness[coordinate] += 2
       end
     end
   end
 
   def lights_lit
     @lights.size
+  end
+  
+  def brightness
+    @brightness.values.reduce(0) { |acc, cur| acc + cur }
   end
 end

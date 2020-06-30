@@ -30,3 +30,16 @@ describe "Day 6 part 1" do
     expect(@grid.lights_lit).to eq 569999
   end
 end
+
+describe "Day 6 part 2" do
+  before :each do
+    @grid = LightGrid.new
+  end
+
+  it "solves part 2", :speed => :slow do
+    File.open('lib/06/input.txt') do |file|
+      file.each_line { |line| @grid.parse_instruction line }
+    end
+    expect(@grid.brightness).to eq 17836115
+  end
+end
