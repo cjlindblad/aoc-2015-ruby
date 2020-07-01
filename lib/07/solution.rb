@@ -14,6 +14,10 @@ class Circuit
     @wires[gate.dest] = expression_lambda
   end
 
+  def override wire, value
+    @wires[wire] = lambda { value }
+  end
+
   def get_expression_lambda gate
     if gate.op.nil?
       if gate.inverse
@@ -44,6 +48,7 @@ class Circuit
     else
       result = @wires[operand].call
       if result.is_a? Integer
+        # cache result
         @wires[operand] = lambda { result }
       end
       result

@@ -54,4 +54,14 @@ describe Circuit do
     value = circuit.execute_single(:a)
     expect(value).to be 46065
   end
+
+  it "solves part 2" do
+    circuit = Circuit.new
+    File.open('lib/07/input.txt') do |file|
+      file.each_line { |line| circuit.add(Gate.new line) }
+    end
+    circuit.override :b, 46065
+    value = circuit.execute_single(:a)
+    expect(value).to eq 0
+  end
 end
