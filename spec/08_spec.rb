@@ -1,0 +1,24 @@
+require '08/solution'
+
+describe StringEvaluator do
+  it "solves part 1 example" do
+    input = '""
+    "abc"
+    "aaa\"aaa"
+    "\x27"'
+
+    evaluator = StringEvaluator.new
+    input.each_line { |line| evaluator.add(line.strip) }
+    result = evaluator.code_length - evaluator.memory_length
+    expect(result).to eq 12 
+  end
+
+  it "solves part 1" do
+    evaluator = StringEvaluator.new
+    File.open('lib/08/input.txt') do |file|
+      file.each_line { |line| evaluator.add(line.strip) }
+    end
+    result = evaluator.code_length - evaluator.memory_length
+    expect(result).to eq 1350
+  end
+end

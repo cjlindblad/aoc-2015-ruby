@@ -62,6 +62,6 @@ describe Circuit do
     end
     circuit.override :b, 46065
     value = circuit.execute_single(:a)
-    expect(value).to eq 0
+    expect(value).to eq 14134
   end
 end
