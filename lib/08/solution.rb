@@ -10,3 +10,9 @@ class StringEvaluator
     @memory_length += eval(string).length
   end
 end
+
+class StringEncoder
+  def self.encode string
+    '"' + string.gsub(/(\\|")/, "\\\1") + '"'
+  end
+end
