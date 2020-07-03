@@ -15,12 +15,20 @@ class Graph
     @nodes[route.to].push(Edge.new route.from, route.distance)
   end
 
-  def shortest_route
+  def distances
     @distances = []
     @nodes.keys.each do |node_name|
       search node_name, [node_name], 0
     end
-    @distances.sort.first
+    @distances
+  end
+
+  def shortest_route
+    distances.sort.first
+  end
+  
+  def longest_route
+    distances.sort.last
   end
 
   def search node_name, visited, distance
