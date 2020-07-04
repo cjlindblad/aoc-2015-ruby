@@ -54,12 +54,12 @@ describe PasswordCalculator do
     expect(PasswordCalculator.next_valid pwd).to eq "ghjaabcc"
   end
 
-  it "solves part 1" do
+  it "solves part 1", :speed => :slow do
     pwd = "hepxcrrq"
     expect(PasswordCalculator.next_valid pwd).to eq "hepxxyzz"
   end
 
-  it "solves part 2" do
+  it "solves part 2", :speed => :slow do
     pwd = "hepxxyzz"
     expect(PasswordCalculator.next_valid pwd).to eq "heqaabcc"
   end
