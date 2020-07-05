@@ -22,27 +22,24 @@ class ReindeerJudge
   end
   
   def update_score
-    sort_reindeers
+    sort_reindeers_by :distance
     leading_distance = @reindeers.first.distance
     @reindeers.select { |reindeer| reindeer.distance == leading_distance }
       .each { |reindeer| reindeer.add_point }
   end
 
-  def sort_reindeers
-    @reindeers.sort_by! { |reindeer| reindeer.distance }.reverse!
+  def sort_reindeers_by property
+    @reindeers.sort_by! { |reindeer| reindeer.send(property) }.reverse!
   end
 
   def winning_distance
-    sort_reindeers
-
+    sort_reindeers_by :distance
     @reindeers.first.distance
   end
 
   def winning_score
-    @reindeers.sort_by { |reindeer| reindeer.points }
-      .reverse
-      .first
-      .points
+    sort_reindeers_by :points
+    @reindeers.first.points
   end
 end
 
