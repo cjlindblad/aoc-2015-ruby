@@ -14,6 +14,16 @@ class SeatingPlanner
     @preferences[name][neighbour] = units
   end
 
+  def add_me
+    guests = @preferences.keys
+    @preferences[:me] = {}
+    guests.each { |guest| @preferences[:me][guest] = 0 }
+
+    guests.each do |guest|
+      @preferences[guest][:me] = 0
+    end
+  end
+
   def optimal_happiness
     best_happiness = 0
     guests = @preferences.keys
