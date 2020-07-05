@@ -20,4 +20,13 @@ describe ReindeerJudge do
     judge.race 2503
     expect(judge.winning_distance).to eq 2696
   end
+
+  it "solves part 2" do
+    judge = ReindeerJudge.new
+    File.open('lib/14/input.txt') do |file|
+      file.each_line { |line| judge.add line }
+    end
+    judge.race 2503
+    expect(judge.winning_score).to eq 1084
+  end
 end

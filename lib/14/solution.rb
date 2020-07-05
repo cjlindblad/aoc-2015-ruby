@@ -16,27 +16,51 @@ class ReindeerJudge
       @reindeers.each do |reindeer|
         reindeer.update i
       end
+
+      update_score
     end
+  end
+  
+  def update_score
+    sort_reindeers
+    leading_distance = @reindeers.first.distance
+    @reindeers.select { |reindeer| reindeer.distance == leading_distance }
+      .each { |reindeer| reindeer.add_point }
+  end
+
+  def sort_reindeers
+    @reindeers.sort_by! { |reindeer| reindeer.distance }.reverse!
   end
 
   def winning_distance
-    @reindeers.sort_by { |reindeer| reindeer.distance }
-      .reverse!
+    sort_reindeers
+
+    @reindeers.first.distance
+  end
+
+  def winning_score
+    @reindeers.sort_by { |reindeer| reindeer.points }
+      .reverse
       .first
-      .distance
+      .points
   end
 end
 
 class Reindeer
-  attr_reader :name, :plan, :distance
+  attr_reader :name, :plan, :distance, :points
 
   def initialize name, plan
     @name = name
     @plan = plan
     @distance = 0
+    @points = 0
   end
 
   def update index
     @distance += @plan[index % @plan.length]
+  end
+
+  def add_point
+    @points += 1
   end
 end
