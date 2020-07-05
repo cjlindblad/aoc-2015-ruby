@@ -1,11 +1,23 @@
+require 'json'
+
 class DocumentAnalyzer
   def initialize string
-    @string = string
+    @document = JSON.parse(string)
   end
 
   def sum
-    digits = @string.scan /-?\d+/
-    print digits
-    digits.reduce(0) { |a, c| a + c.to_i }
+    @sum = 0
+    traverse @document
+    @sum
+  end
+
+  def traverse node
+    node.each do |e|
+      if e.is_a? Array or e.is_a? Hash
+        traverse e
+      end
+
+      @sum += e if e.is_a? Integer
+    end
   end
 end
