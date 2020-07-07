@@ -1,3 +1,26 @@
+class MFCSAM
+  def initialize
+    ticker_sue_input = "children: 3, cats: 7, samoyeds: 2, pomeranians: 3, akitas: 0, vizslas: 0, goldfish: 5, trees: 3, cars: 2, perfumes: 1"
+    @ticker_sue = Sue.from_string ticker_sue_input
+    @sues = []
+  end
+
+  def add_sue input
+    sue = Sue.from_string input
+    @sues << sue
+  end
+
+  def find_matching_sue
+    target_sue = 0
+    @sues.each do |sue|
+      if sue.compounds - @ticker_sue.compounds == []
+        target_sue = sue.number
+      end
+    end
+    target_sue
+  end
+end
+
 class Sue
   attr_reader :number, :compounds
 
