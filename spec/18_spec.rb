@@ -20,4 +20,14 @@ describe Grid do
     100.times { grid.next }
     expect(grid.lights).to eq 768
   end
+
+  it "solves part 2" do
+    input = File.read('lib/18/input.txt')
+    grid = Grid.new input
+    100.times do
+      grid.next
+      grid.light_corners
+    end
+    expect(grid.lights).to eq 781
+  end
 end

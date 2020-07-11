@@ -55,4 +55,14 @@ class Grid
 
     neighbours
   end
+
+  def light_corners
+    y_length = @grid.length - 1
+    x_length = @grid.first.length - 1
+
+    @grid[0][0] = :on
+    @grid[0][x_length] = :on
+    @grid[y_length][0] = :on
+    @grid[y_length][y_length] = :on
+  end
 end
