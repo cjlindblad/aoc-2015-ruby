@@ -9,7 +9,7 @@ describe Packer do
     expect(packer.combinations.length).to eq 4 
   end
 
-  it "solves part 1" do
+  it "solves part 1", :speed => :slow do
     containers = []
     File.open('lib/17/input.txt') do |file|
       file.each_line do |line|
@@ -21,7 +21,7 @@ describe Packer do
     expect(packer.combinations.length).to eq 1304
   end
 
-  it "solves part 2" do
+  it "solves part 2", :speed => :slow do
     containers = []
     File.open('lib/17/input.txt') do |file|
       file.each_line do |line|
@@ -39,6 +39,6 @@ describe Packer do
       result += 1
       index += 1
     end
-    expect(result).to eq 0   
+    expect(result).to eq 18
   end
 end
