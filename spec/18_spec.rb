@@ -21,7 +21,7 @@ describe Grid do
     expect(grid.lights).to eq 768
   end
 
-  it "solves part 2" do
+  it "solves part 2", :speed => :slow do
     input = File.read('lib/18/input.txt')
     grid = Grid.new input
     100.times do
