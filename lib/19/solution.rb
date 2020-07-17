@@ -15,6 +15,8 @@ class Parser
 end
 
 class MoleculeReplacer
+  attr_accessor :molecule
+
   def initialize(molecule, replacements)
     @molecule = molecule
     @replacements = replacements
@@ -30,9 +32,9 @@ class MoleculeReplacer
 
   def variants_for(key, value)
     matching_indices(key).map do |match_index|
-      variant = @molecule.clone
-      variant[match_index..(match_index + key.length - 1)] = value
-      variant
+      pre_match = @molecule[0...match_index]
+      post_match = @molecule[(match_index + key.length)..]
+      "#{pre_match}#{value}#{post_match}"
     end
   end
 
@@ -43,3 +45,27 @@ class MoleculeReplacer
     end
   end
 end
+
+class MoleculeFinder
+  def initialize(replacements, goal)
+    @replacements = replacements
+    @goal = goal
+  end
+
+  def find
+    sorted_replacements= @replacements.sort {|e| e.last.length}
+    molecule = @goal
+    iterations = 0
+    until molecule == "e"
+      sorted_replacements.each do |replacement|
+        if molecule =~ /#{replacement.last}/
+          molecule.sub!(replacement.last, replacement.first)
+          break
+        end
+      end
+      iterations += 1
+    end
+    iterations
+  end
+end
+

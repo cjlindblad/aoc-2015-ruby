@@ -1,4 +1,5 @@
 require '19/solution'
+require 'set'
 
 describe Parser do
   it "parses input" do
@@ -70,3 +71,29 @@ describe MoleculeReplacer do
     expect(distinct_variants.length).to eq 535
   end
 end
+
+describe MoleculeFinder do
+  it "finds HOHOHO from test input" do
+    replacements = [
+      ["e", "H"],
+      ["e", "O"],
+      ["H", "HO"],
+      ["H", "OH"],
+      ["O", "HH"]
+    ]
+
+    goal = "HOHOHO"
+    finder = MoleculeFinder.new(replacements, goal)
+    iterations = finder.find
+    expect(iterations).to eq 6
+  end
+
+  it "solves part 1" do
+    input = File.read('lib/19/input.txt')
+    parser = Parser.new(input)
+    finder = MoleculeFinder.new(parser.replacements, parser.molecule)
+    iterations = finder.find
+    expect(iterations).to eq 212
+  end
+end
+
