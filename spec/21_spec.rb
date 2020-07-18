@@ -114,5 +114,32 @@ describe Fight do
     
     expect(best_cost).to eq 78
   end
+
+  it "solves part 2" do
+    boss_equipment = Equipment.new(
+      Item.new("weapon", damage: 8),
+      Item.new("armor", armor: 1)
+    )
+
+    shop = Shop.new
+    equipment_iterator = EquipmentIterator.new(
+      weapons: shop.weapons,
+      armor: shop.armor,
+      rings: shop.rings
+    )
+    hero_equipment = equipment_iterator.iterations
+    worst_cost = 0
+    hero_equipment.each do |equipment|
+      hero = Character.new("hero", hp: 100, equipment: equipment)
+      boss = Character.new("boss", hp: 104, equipment: boss_equipment)
+      fight = Fight.new(hero, boss)
+      fight.execute
+      if hero.dead && equipment.cost > worst_cost
+        worst_cost = equipment.cost
+      end
+    end
+    
+    expect(worst_cost).to eq 148
+  end
 end
 
